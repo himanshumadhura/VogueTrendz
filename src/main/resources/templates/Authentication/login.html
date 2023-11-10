@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Public/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+<section class="vh-100 bg-dark-gray">
+    <div class="container py-5 my-4 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100 animate__animated animate__fadeIn">
+            <div class="col col-xl-10">
+                <div class="card bg-whitesmoke" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="/image/image2.jpg"
+                                 alt="login form" class="img-fluid banner-login" />
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-start">
+                            <div class="card-body p-4 p-lg-5 text-black">
+
+                                <form th:action="@{/doLogin}" method="post" th:object="${loginData}">
+                                    <div th:if="${param.error}" class="alert alert-danger">
+                                        Invalid Username and password
+                                    </div>
+                                    <div th:if="${param.logout}" class="alert alert-success">
+                                        Logout Successfully
+                                    </div>
+
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <img src="/image/LogoSymbol.png" alt="logo" width="auto" height="80">
+                                        <span class="h1 fw-bold mb-0"></span>
+                                    </div>
+
+                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                                    <div class="mb-4">
+                                        <div class="input-group d-flex">
+                                            <i class="input-group-text bi bi-person"></i>
+                                            <input
+                                                    type="email"
+                                                    name="username"
+                                                    class="form-control"
+                                                    placeholder="Email"
+                                                    th:value="${loginData.emailId}"
+                                                    th:classappend="${#fields.hasErrors('emailId') ? 'is-invalid' : ''}"
+                                                    required
+                                            >
+                                            <div th:each="e : ${#fields.errors('emailId')}" th:text="${e}" class="invalid-feedback"/>
+                                        </div>
+                                    </div>
+                                    <div class="mb-5">
+                                        <div class="input-group d-flex">
+                                            <i class="input-group-text bi bi-key"></i>
+                                            <input
+                                                    type="password"
+                                                    name="password"
+                                                    class="form-control"
+                                                    placeholder="Password"
+                                                    th:value="${loginData.password}"
+                                                    th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                                    required
+                                            >
+                                            <div th:each="e : ${#fields.errors('password')}" th:text="${e}" class="invalid-feedback"/>
+                                        </div>
+                                    </div>
+                                    <div class="container text-center mb-4">
+                                        <button type="submit" class="btn btn-success btn-pill">Login</button>
+                                    </div>
+
+                                    <a class="small text-muted" href="#!">Forgot password?</a>
+                                    <p class="mb-5 pb-lg-3 text-muted">Don't have an account? <a th:href="@{/register}">Register here</a></p>
+                                    <a href="#!" class="small text-muted">Terms of use.</a>
+                                    <a href="#!" class="small text-muted">Privacy policy</a>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

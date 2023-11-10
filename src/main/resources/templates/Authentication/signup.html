@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Public/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+<section>
+    <div class="container mt-5 pt-5">
+        <div class="row animate__animated animate__fadeIn mt-5">
+            <div class="col-md-4 offset-md-4 form-style">
+                <div class="p-4">
+                    <form th:action="@{/regProcess}" method="post" th:object="${user}">
+
+                        <div class="mb-3">
+                            <div th:if="${session.message}">
+                                <div th:classappend="${session.message.type}" class="alert" role="alert">
+                                    <p th:text="${session.message.content}"></p>
+                                </div>
+                                <th:block th:text="${@sessionHelper.removeSessionAttribute()}"></th:block>
+                            </div>
+                            <h2 class="text-center mb-5">Create an Account</h2>
+                            <div class="input-group d-flex">
+                                <i class="input-group-text bi bi-person"></i>
+                                <input
+                                        type="text"
+                                        name="firstName"
+                                        class="form-control"
+                                        placeholder="First Name"
+                                        th:value="${user.firstName}"
+                                        th:classappend="${#fields.hasErrors('firstName') ? 'is-invalid' : ''}"
+                                        required
+                                >
+                                <div th:each="e : ${#fields.errors('firstName')}" th:text="${e}" class="invalid-feedback"/>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-group d-flex">
+                                <i class="input-group-text bi bi-person"></i>
+                                <input
+                                        type="text"
+                                        name="lastName"
+                                        class="form-control"
+                                        placeholder="Last Name"
+                                        th:value="${user.lastName}"
+                                        th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' : ''}"
+                                        required
+                                >
+                                <div th:each="e : ${#fields.errors('lastName')}" th:text="${e}" class="invalid-feedback"/>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-group d-flex">
+                                <i class="input-group-text bi bi-envelope"></i>
+                                <input
+                                        type="email"
+                                        name="email"
+                                        class="form-control"
+                                        placeholder="Email"
+                                        th:value="${user.email}"
+                                        th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+                                        required
+                                >
+                                <div th:each="e : ${#fields.errors('email')}" th:text="${e}" class="invalid-feedback"/>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-group d-flex">
+                                <i class="input-group-text bi bi-phone"></i>
+                                <input
+                                        type="number"
+                                        name="phoneNumber"
+                                        class="form-control"
+                                        placeholder="Mobile Number"
+                                        th:value="${user.phoneNumber}"
+                                        th:classappend="${#fields.hasErrors('phoneNumber') ? 'is-invalid' : ''}"
+                                        required
+                                >
+                                <div th:each="e : ${#fields.errors('phoneNumber')}" th:text="${e}" class="invalid-feedback"/>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-group d-flex">
+                                <i class="input-group-text bi bi-key"></i>
+                                <input
+                                        type="password"
+                                        name="password"
+                                        class="form-control"
+                                        placeholder="Password"
+                                        th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                        required
+                                >
+                                <div th:each="e : ${#fields.errors('password')}" th:text="${e}" class="invalid-feedback"/>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-group d-flex">
+                                <i class="input-group-text bi bi-key"></i>
+                                <input
+                                        type="password"
+                                        name="confirmPassword"
+                                        class="form-control"
+                                        placeholder="Confirm Password"
+                                        required
+                                >
+                            </div>
+                            <div th:text="${cMsg}" class="text-danger"/>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check d-flex justify-content-center">
+                                <input
+                                       type="checkbox"
+                                       class="form-check-input me-2"
+                                       name="agreement"
+                                       id="agreement"
+                                >
+                                <label class="form-check-label" for="agreement">
+                                    I agree all statements in Terms of service
+                                </label>
+                            </div>
+                            <div th:text="${agree}" class="text-center text-danger"/>
+                        </div>
+
+                        <div class="container text-center mb-4">
+                            <button type="submit" class="btn btn-success me-2 btn-pill">Register</button>
+                            <button type="reset" class="btn btn-outline-secondary btn-pill">Clear</button>
+                        </div>
+                        <div class="container text-center">
+                            <p>(Already a user? <a th:href="@{/login}" >Login here</a>)</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-black" th:fragment="navbar(pg)">
+    <div class="container-fluid">
+        <a th:href="@{/user/dashboard}" class="navbar-brand">
+            <img src="/image/LogoSymbol.png" alt="" width="auto" height="40">
+            VogueTrendz
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="collapse navbar-collapse d-flex text-uppercase" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a th:href="@{/user/dashboard}" th:classappend="${pg=='home'} ? 'nav-link active' : 'nav-link'">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{#}" th:classappend="${pg=='collection'} ? 'nav-link active' : 'nav-link'">Collections</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/user/contact}" th:classappend="${pg=='contact'} ? 'nav-link active' : 'nav-link'">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/user/about}" th:classappend="${pg=='about'} ? 'nav-link active' : 'nav-link'">About</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav1">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a th:href="@{/user/wishlist}" th:classappend="${pg=='wishlist' ? 'nav-link active bi bi-suit-heart-fill fs-5' : 'nav-link bi bi-suit-heart fs-5'}"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{#}" th:classappend="${pg=='cart'} ? 'nav-link active bi bi-cart fs-5' : 'nav-link bi bi-cart fs-5'"></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a th:href="@{#}" class="nav-link bi bi-person-circle fs-5">
+                                <span th:text="${user.firstName} +' '+${user.lastName}" class="dropdown-toggle" id="dropdownMenu" data-bs-toggle="dropdown">
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a th:href="@{#}" class="dropdown-item">Your Profile</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{#}" class="dropdown-item">Change Password</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/logout}" class="dropdown-item">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
