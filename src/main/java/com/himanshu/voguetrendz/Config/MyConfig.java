@@ -1,5 +1,6 @@
 package com.himanshu.voguetrendz.Config;
 
+import com.himanshu.voguetrendz.Entities.CustomSuccessHandler;
 import com.himanshu.voguetrendz.Service.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -43,14 +45,14 @@ public class MyConfig{
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/css/**", "/image/**", "/js/**", "/**").permitAll()
                         .requestMatchers("/user/**").hasRole("CUSTOMER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/css/**", "/image/**", "/js/**", "/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
+                        .successHandler(new CustomSuccessHandler())
                         .loginProcessingUrl("/doLogin")
-                        .defaultSuccessUrl("/user/dashboard",true)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")

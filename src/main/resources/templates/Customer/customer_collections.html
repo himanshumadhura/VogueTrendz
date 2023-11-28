@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+  <section>
+    <ul class="dropdown-menu dropdown-menu-dark full-dropdown banner-collections animate__animated animate__fadeIn" th:fragment="collection">
+      <li>
+        <a th:href="@{/user/collections/mens}" class="dropdown-item">
+          <img th:src="@{/image/MenCategory.jpeg}" alt="men category logo" class="collection-style"><br>
+          <span>MEN</span>
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/user/collections/women}" class="dropdown-item">
+          <img th:src="@{/image/WomenCategory.jpeg}" alt="women category logo" class="collection-style"><br>
+          <span>WOMEN</span>
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/user/collections/kids}" class="dropdown-item">
+          <img th:src="@{/image/KidsCategory.jpeg}" alt="kids category logo" class="collection-style"><br>
+          <span>KIDS</span>
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/user/collections/footwear}" class="dropdown-item">
+          <img th:src="@{/image/FootwearCategory.jpeg}" alt="footwear category logo" class="collection-style"><br>
+          <span>FOOTWEAR</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Admin/admin_base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<section class="vh-100 bg-dark-gray">
+    <div class="container py-5 my-4 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-6">
+                <div class="card bg-whitesmoke" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="card-body p-4 p-lg-5 text-black">
+                            <form th:action="@{/admin/addProduct}" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <h2 class="text-center mb-5">Add Product</h2>
+                                    <div class="input-group d-flex">
+                                        <i class="input-group-text">
+                                            <img th:src="@{/image/tshirt.png}" alt="" width="auto" height="22vh">
+                                        </i>
+                                        <input
+                                                type="text"
+                                                id="productName"
+                                                name="productName"
+                                                class="form-control"
+                                                placeholder="Product Name"
+                                                required
+                                        >
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-flex">
+
+                                    <label for="category" class="input-group d-flex">
+                                        <i class="input-group-text">
+                                            <img th:src="@{/image/tshirt.png}" alt="" width="auto" height="22vh">
+                                        </i>
+                                        <select id="category" name="category" class="input-group-text" required>
+                                            <option name="none" value="" selected>Select the category</option>
+                                            <option name="mens" value="mens">Mens</option>
+                                            <option name="women" value="women">Women</option>
+                                            <option name="kids" value="kids">Kids</option>
+                                            <option name="footwear" value="footwear">Footwear</option>
+                                        </select>
+                                    </label>
+
+                                    <div class="input-group d-flex">
+                                        <i class="input-group-text" style="font-size: large">₹</i>
+                                        <input
+                                                type="number"
+                                                id="price"
+                                                name="price"
+                                                class="form-control"
+                                                placeholder="Price"
+                                                required
+                                        >
+                                    </div>
+                                </div>
+                                <div class="mb-5">
+                                    <div class="input-group">
+                                        <input
+                                                type="file"
+                                                id="imageUrl"
+                                                name="imageUrl"
+                                                class="form-control"
+                                                accept=".png, .jpg, .jpeg"
+                                                required
+                                        >
+                                    </div>
+                                </div>
+                                <div class="container text-center">
+                                    <button type="submit" id="addProduct" class="btn btn-success btn-pill">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+</body>
+</html>
