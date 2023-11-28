@@ -27,8 +27,9 @@
                         <li class="nav-item">
                             <a th:href="@{/user/dashboard}" th:classappend="${pg=='home'} ? 'nav-link active' : 'nav-link'">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item dropdown">
                             <a th:href="@{#}" th:classappend="${pg=='collection'} ? 'nav-link active' : 'nav-link'">Collections</a>
+                            <div th:replace="Customer/customer_collections::collection"></div>
                         </li>
                         <li class="nav-item">
                             <a th:href="@{/user/contact}" th:classappend="${pg=='contact'} ? 'nav-link active' : 'nav-link'">Contact</a>
@@ -51,7 +52,7 @@
                                 <span th:text="${user.firstName} +' '+${user.lastName}" class="dropdown-toggle" id="dropdownMenu" data-bs-toggle="dropdown">
                                 </span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-right">
+                            <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
                                     <a th:href="@{#}" class="dropdown-item">Your Profile</a>
                                 </li>

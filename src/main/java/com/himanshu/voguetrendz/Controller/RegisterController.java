@@ -50,7 +50,8 @@ public class RegisterController {
                 user.setRole("ROLE_CUSTOMER");
                 this.userRepository.save(user);
                 System.out.println("USER SAVED");
-                return "Authentication/login";
+                Thread.sleep(1600);
+                return "redirect:/login";
             }
         }catch (DataIntegrityViolationException dataIntegrityViolationException){
             session.setAttribute("message", new Message("User already exists", "alert-danger"));

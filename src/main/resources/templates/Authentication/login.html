@@ -15,13 +15,14 @@
                 <div class="card bg-whitesmoke" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="/image/image2.jpg"
+                            <img th:src="@{/image/image2.jpg}"
                                  alt="login form" class="img-fluid banner-login" />
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-start">
                             <div class="card-body p-4 p-lg-5 text-black">
 
                                 <form th:action="@{/doLogin}" method="post" th:object="${loginData}">
+
                                     <div th:if="${param.error}" class="alert alert-danger">
                                         Invalid Username and password
                                     </div>
