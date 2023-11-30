@@ -8,11 +8,11 @@
     <title></title>
 </head>
 <body>
-    <section>
+    <section class="bg-dark-theme">
         <div class="container p-5">
-            <div class="row mt-4 pt-5 g-3" th:if="${!products.isEmpty()}">
+            <div class="row mt-4 pt-5 g-4" th:if="${!products.isEmpty()}">
                 <div th:each="p: ${products}" class="col">
-                    <div class="card collection-card bg-secondary">
+                    <div class="card collection-card bg-secondary animate__animated animate__fadeIn">
                         <div>
                             <a href="#">
                                 <img th:src="@{'/image/'+${p.image}}" th:alt="${p.getCategory()} +' img'" class="card-img-top collection-image">
@@ -21,14 +21,14 @@
                         <div class="card-body">
                             <a href="#" class="nav-link fs-2 fw-bold" th:text="${p.getName()}"></a>
                             <span class="fw-bold">
-                                <span th:text="${p.getPrice()}"></span>
+                                <span th:text="'₹ '+${p.getPrice()}"></span>
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mt-4 pt-5" th:unless="${!products.isEmpty()}">
-                <div class="container text-center fs-3" th:text="${message}"></div>
+                <div class="container text-center fs-3 text-white" th:text="${message}"></div>
             </div>
         </div>
     </section>

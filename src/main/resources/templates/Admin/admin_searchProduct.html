@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Admin/admin_base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<section class="vh-100">
+    <div class="container py-5 my-4 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-6">
+                <div class="card bg-whitesmoke" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="card-body p-4 p-lg-5 text-black">
+                            <form th:action="@{/admin/detailProduct}" method="post">
+                                <div class="mb-4">
+                                    <div th:if="${session.message}">
+                                        <div th:classappend="${session.message.type}" class="alert" role="alert">
+                                            <p th:text="${session.message.content}"></p>
+                                        </div>
+                                        <th:block th:text="${@sessionHelper.removeSessionAttribute()}"></th:block>
+                                    </div>
+                                    <h2 class="text-center mb-5">Search Product</h2>
+                                    <div class="input-group d-flex">
+                                        <i class="input-group-text">
+                                            <img th:src="@{/image/tshirt.png}" alt="" width="auto" height="22vh">
+                                        </i>
+                                        <input
+                                                type="number"
+                                                id="productId1"
+                                                name="productId1"
+                                                class="form-control"
+                                                placeholder="Product Id"
+                                                required
+                                        >
+                                    </div>
+                                </div>
+                                <div class="container text-center">
+                                    <button type="submit" id="searchPId" name="searchPId" class="btn btn-success btn-pill-large">Search Product</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

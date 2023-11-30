@@ -12,7 +12,7 @@
                 <div class="card bg-whitesmoke" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="card-body p-4 p-lg-5 text-black">
-                            <form th:action="@{/admin/addProduct}" method="post" enctype="multipart/form-data">
+                            <form th:action="@{/admin/updateProductProcess}" method="post" th:object="${product}" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <div th:if="${session.message}">
                                         <div th:classappend="${session.message.type}" class="alert" role="alert">
@@ -20,7 +20,23 @@
                                         </div>
                                         <th:block th:text="${@sessionHelper.removeSessionAttribute()}"></th:block>
                                     </div>
-                                    <h2 class="text-center mb-5">Add Product</h2>
+                                    <h2 class="text-center mb-5">Update Product</h2>
+                                    <div class="input-group d-flex">
+                                        <i class="input-group-text">
+                                            <img th:src="@{/image/tshirt.png}" alt="" width="auto" height="22vh">
+                                        </i>
+                                        <input
+                                                type="number"
+                                                id="productId"
+                                                name="productId"
+                                                class="form-control"
+                                                placeholder="Product Id"
+                                                th:value="${result.id}"
+                                                readonly
+                                        >
+                                    </div>
+                                </div>
+                                <div class="mb-3">
                                     <div class="input-group d-flex">
                                         <i class="input-group-text">
                                             <img th:src="@{/image/tshirt.png}" alt="" width="auto" height="22vh">
@@ -31,6 +47,7 @@
                                                 name="productName"
                                                 class="form-control"
                                                 placeholder="Product Name"
+                                                th:value="${result.name}"
                                                 required
                                         >
                                     </div>
@@ -58,6 +75,7 @@
                                                 name="price"
                                                 class="form-control"
                                                 placeholder="Price"
+                                                th:value="${result.price}"
                                                 required
                                         >
                                     </div>
@@ -76,15 +94,16 @@
                                 </div>
                                 <div class="mb-4">
                                     <textarea
-                                                id="description"
-                                                name="description"
-                                                class="form-control"
-                                                placeholder="Product Description"
+                                            id="description"
+                                            name="description"
+                                            class="form-control"
+                                            placeholder="Product Description"
+                                            th:text="${result.description}"
                                     ></textarea>
                                 </div>
                                 <div class="container text-center">
-                                    <button type="submit" id="addProduct" class="btn btn-success btn-pill">Add</button>
-                                    <button type="button" id="cancelBtn" class="btn btn-secondary btn-pill">cancel</button>
+                                    <button type="submit" id="updateProduct" class="btn btn-success btn-pill-large">Update Product</button>
+                                    <button type="button" id="cancelBtn" class="btn btn-secondary btn-pill">Cancel</button>
                                 </div>
                             </form>
                         </div>
@@ -98,7 +117,7 @@
 <script>
     tinymce.init({
         selector: '#description',
-        height: 280,
+        height: 250,
         statusbar: false,
     });
 </script>

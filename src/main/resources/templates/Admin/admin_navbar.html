@@ -31,10 +31,7 @@
                             <a th:href="@{/admin/addProduct}" th:classappend="${pg=='addProduct'} ? 'nav-link active' : 'nav-link'">Add Product</a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{#}" th:classappend="${pg=='updateProduct'} ? 'nav-link active' : 'nav-link'">Update Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a th:href="@{#}" th:classappend="${pg=='deleteProduct'} ? 'nav-link active' : 'nav-link'">Delete Product</a>
+                            <a th:href="@{/admin/searchProduct}" th:classappend="${pg=='update/deleteProduct'} ? 'nav-link active' : 'nav-link'">Update/Delete Product</a>
                         </li>
                     </ul>
                 </div>
