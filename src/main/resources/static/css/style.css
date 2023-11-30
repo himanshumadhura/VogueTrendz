@@ -12,12 +12,17 @@
     width: 100px;
 }
 
-.bg-black{
-    background: black;
+.btn-pill-large{
+    border-radius: 100px;
+    width: auto;
 }
 
-.bg-dark-gray{
-    background: rgba(0,0,0,.7);
+.bg-black{
+    background-color: black;
+}
+
+.bg-dark-theme{
+    background-color: #202325;
 }
 
 .banner-home{
@@ -101,14 +106,14 @@ input[type=number] {
 
 .collection-card{
     border-radius: 1rem 1rem 1rem 1rem;
-    width: 45vh;
+    width: 35vh;
     height: auto;
 }
 
 .collection-image{
     border-radius: 1rem 1rem 0 0;
-    height: 50vh;
-    object-fit: cover;
+    height: 35vh;
+    object-fit: fill;
 }
 
 @media only screen and (max-width: 991px)  {
