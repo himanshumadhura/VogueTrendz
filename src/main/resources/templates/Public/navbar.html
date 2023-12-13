@@ -28,7 +28,7 @@
                             <a th:href="@{/}" th:classappend="${pg=='home'} ? 'nav-link active' : 'nav-link'">Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a th:href="@{#}" th:classappend="${pg=='collection'} ? 'nav-link active' : 'nav-link'">Collections</a>
+                            <a th:href="@{/collection}" th:classappend="${pg=='collection'} ? 'nav-link active' : 'nav-link'">Collections</a>
                             <div th:replace="Public/collections::collection"></div>
                         </li>
                         <li class="nav-item">

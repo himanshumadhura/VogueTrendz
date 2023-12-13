@@ -48,6 +48,23 @@ public class CustomerHomeController {
         model.addAttribute("pg","home");
         return "Customer/dashboard";
     }
+
+    @GetMapping("/collection")
+    public String collection(Model model){
+        try{
+            List<Product> products =  this.productService.getAllProducts();
+            if(products.size()<=0){
+                model.addAttribute("message", "No Product Found");
+            }
+            model.addAttribute("products", products);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        model.addAttribute("pg", "collection");
+        model.addAttribute("title", "Collections");
+        return "Customer/customer_allProducts";
+    }
     @GetMapping("/about")
     public String about(Model model){
         model.addAttribute("title","About - VogueTrendz");
@@ -82,7 +99,7 @@ public class CustomerHomeController {
         }
 
         model.addAttribute("pg", "collection");
-        model.addAttribute("title", "Collections-Mens");
+        model.addAttribute("title", "Collections-"+category);
         return "Customer/customer_products";
     }
 
