@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Public/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+<section>
+    <div class="container py-5">
+        <div class="row mt-4 pt-5 gx-5">
+            <aside class="col-lg-6">
+                <div class="d-flex justify-content-center mb-3">
+                    <img th:src="@{'/image/'+${product.image}}"
+                         th:alt="${product.category} +' img'" class="img-fluid product-image" />
+                </div>
+            </aside>
+            <main class="col-lg-6 text-whiteSmoke">
+                <div class="ps-lg-3">
+                    <h4 class="title" th:text="${product.name}"></h4>
+                    <div class="d-flex flex-row my-3">
+                        <div class="text-warning mb-1 me-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span class="ms-1">4.5</span>
+                        </div>
+<!--                        <span><i class="bi bi-basket2-fill mx-1"></i>154 orders</span>-->
+                        <span class="text-success ms-3">In stock</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="h5" th:text="'₹ '+${product.price}"></span>
+                    </div>
+
+                    <p class="mb-3" th:text="${product.description}"></p>
+
+                    <div class="row">
+                        <dt class="col-3">Type</dt>
+                        <dd class="col-9" th:text="${product.type}"></dd>
+
+                        <dt class="col-3">Color</dt>
+                        <dd class="col-9" th:text="${product.color}"></dd>
+
+                        <dt class="col-3">Material</dt>
+                        <dd class="col-9" th:text="${product.material}"></dd>
+
+                        <dt class="col-3">Brand</dt>
+                        <dd class="col-9" th:text="${product.brand}"></dd>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4 col-6" th:if="${product.category}!='accessories'">
+                            <label class="mb-2" for="size">Size</label>
+                            <select class="form-select border border-secondary" id="size" style="height: 35px;">
+                                <option>XS</option>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>Xl</option>
+                            </select>
+                        </div>
+                        <!-- col.// -->
+                        <div class="col-md-4 col-6 mb-3">
+                            <label class="mb-2 d-block">Quantity</label>
+                            <div class="input-group mb-3" style="width: 170px;">
+                                <button class="btn btn-light border px-3 input-group-text" type="button" id="decrease-quantity-btn">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input type="number" class="form-control text-center input-group-text" placeholder="1" value="1" id="quantity" readonly>
+                                <button class="btn btn-light border px-3 input-group-text" type="button" id="increase-quantity-btn">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{/user/dasboard}" class="btn btn-warning">Buy now</a>
+                    <a th:href="@{/user/dashboard}" class="btn btn-primary"> <i class="me-1 bi bi-cart"></i>Add to cart</a>
+                    <a th:href="@{/user/dashboard}" class="btn btn-light px-3"> <i class="me-1 bi bi-heart"></i>Add to Wishlist</a>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+</body>
+</html>

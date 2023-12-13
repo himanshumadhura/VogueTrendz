@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Customer/customer_base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<section class="h-custom">
+    <div class="container my-5 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8">
+                <div class="card bg-lightDark-theme text-whiteSmoke">
+                    <div class="card-body p-4">
+                        <form th:action="@{/user/addAddressProcess}" method="post">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-9">
+                                    <h2 class="text-center mb-5">Add your address</h2>
+                                    <div class="mb-4">
+                                        <div class="input-group d-flex">
+                                            <i class="input-group-text bi bi-house-door"></i>
+                                            <input
+                                                    type="text"
+                                                    id="houseNo"
+                                                    name="houseNo"
+                                                    class="form-control"
+                                                    placeholder="House/Flat No."
+                                                    required
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-group d-flex">
+                                            <i class="input-group-text">
+                                                <img th:src="@{/image/road.png}" alt="" width="auto" height="18vh">
+                                            </i>
+                                            <input
+                                                    type="text"
+                                                    id="area"
+                                                    name="area"
+                                                    class="form-control"
+                                                    placeholder="Area/Street/Sector"
+                                                    required
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-group d-flex">
+                                            <i class="input-group-text bi bi-house-door"></i>
+                                            <input
+                                                    type="text"
+                                                    id="city"
+                                                    name="city"
+                                                    class="form-control"
+                                                    placeholder="Town/City"
+                                                    required
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-group d-flex">
+                                            <i class="input-group-text bi bi-pencil"></i>
+                                            <input
+                                                    type="number"
+                                                    id="pinCode"
+                                                    name="pinCode"
+                                                    class="form-control"
+                                                    placeholder="Pin Code"
+                                                    required
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-group d-flex">
+                                            <i class="input-group-text bi bi-house-door"></i>
+                                            <input
+                                                    type="text"
+                                                    id="state"
+                                                    name="state"
+                                                    class="form-control"
+                                                    placeholder="State"
+                                                    required
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="container text-center">
+                                        <button type="submit" id="addAddress" class="btn btn-success me-2 btn-pill">Add</button>
+                                        <button type="button" class="btn btn-secondary btn-pill" onclick="window.location.href='/user/profile'">Back</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

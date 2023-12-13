@@ -52,6 +52,71 @@
                                         >
                                     </div>
                                 </div>
+
+                                <div class="mb-3">
+                                    <div class="input-group d-flex">
+                                        <i class="input-group-text">
+                                            <img th:src="@{/image/tshirt.png}" alt="" width="auto" height="22vh">
+                                        </i>
+                                        <input
+                                                type="text"
+                                                id="brand"
+                                                name="brand"
+                                                class="form-control"
+                                                placeholder="Brand Name"
+                                                th:value="${result.brand}"
+                                                required
+                                        >
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group d-flex">
+                                        <i class="input-group-text">
+                                            <img th:src="@{/image/tshirt.png}" alt="" width="auto" height="22vh">
+                                        </i>
+                                        <input
+                                                type="text"
+                                                id="color"
+                                                name="color"
+                                                class="form-control"
+                                                placeholder="Color"
+                                                th:value="${result.color}"
+                                                required
+                                        >
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-flex">
+                                    <div class="input-group d-flex">
+                                        <i class="input-group-text">
+                                            <img th:src="@{/image/tshirt.png}" alt="" width="auto" height="22vh">
+                                        </i>
+                                        <input
+                                                type="text"
+                                                id="material"
+                                                name="material"
+                                                class="form-control"
+                                                placeholder="Material Type"
+                                                th:value="${result.material}"
+                                                required
+                                        >
+                                    </div>
+
+                                    <div class="input-group d-flex">
+                                        <i class="input-group-text">
+                                            <img th:src="@{/image/tshirt.png}" alt="" width="auto" height="22vh">
+                                        </i>
+                                        <input
+                                                type="text"
+                                                id="type"
+                                                name="type"
+                                                class="form-control"
+                                                placeholder="Fitting Type"
+                                                th:value="${result.type}"
+                                                required
+                                        >
+                                    </div>
+                                </div>
+
                                 <div class="mb-3 d-flex">
 
                                     <label for="category" class="input-group d-flex">
@@ -64,6 +129,7 @@
                                             <option name="women" value="women">Women</option>
                                             <option name="kids" value="kids">Kids</option>
                                             <option name="footwear" value="footwear">Footwear</option>
+                                            <option name="accessories" value="accessories">Accessories</option>
                                         </select>
                                     </label>
 
@@ -99,6 +165,8 @@
                                             class="form-control"
                                             placeholder="Product Description"
                                             th:text="${result.description}"
+                                            rows="5"
+                                            required
                                     ></textarea>
                                 </div>
                                 <div class="container text-center">
@@ -113,13 +181,5 @@
         </div>
     </div>
 </section>
-<script src="https://cdn.tiny.cloud/1/bn0rykzu0lra4f98z0mt5bn9pgw441o4y244sdsrwlwj2cu1/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-    tinymce.init({
-        selector: '#description',
-        height: 250,
-        statusbar: false,
-    });
-</script>
 </body>
 </html>

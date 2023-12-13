@@ -1,13 +1,16 @@
 $(document).ready(function(){
-    $("#registerBtn").click(function (){
-        var fName = $("#firstName").val();
-        var lName = $("#lastName").val();
-        var email = $("#email").val();
-        var phNumber = $("#phoneNumber").val();
-        var pass = $("#password").val();
-        var cPass = $("#confirmPassword").val();
 
-        if(fName && lName && email && phNumber && pass && cPass){
+    $("#registerBtn").click(function (){
+        let fName = $("#firstName").val();
+        let lName = $("#lastName").val();
+        let email = $("#email").val();
+        let phNumber = $("#phoneNumber").val();
+        let pass = $("#password").val();
+        let cPass = $("#confirmPassword").val();
+        let agree = $("#agreement").val();
+
+
+        if(fName && lName && email && phNumber && pass && cPass && agree){
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -19,10 +22,10 @@ $(document).ready(function(){
     });
 
     $("#addProduct").click(function (){
-        var pName = $("#productName").val();
-        var cat = $("#category").val();
-        var price = $("#price").val();
-        var img = $("#imageUrl").val();
+        let pName = $("#productName").val();
+        let cat = $("#category").val();
+        let price = $("#price").val();
+        let img = $("#imageUrl").val();
 
         if(pName && cat && price && img){
             Swal.fire({
@@ -36,10 +39,10 @@ $(document).ready(function(){
     });
 
     $("#updateProduct").click(function (){
-        var pName = $("#productName").val();
-        var cat = $("#category").val();
-        var price = $("#price").val();
-        var img = $("#imageUrl").val();
+        let pName = $("#productName").val();
+        let cat = $("#category").val();
+        let price = $("#price").val();
+        let img = $("#imageUrl").val();
 
         if(pName && cat && price && img){
             Swal.fire({
@@ -76,7 +79,7 @@ $(document).ready(function(){
                     showConfirmButton: false,
                     timer: 1500
                 });
-                window.location.href="/admin/deleteProductProcess/"+$(this).val();
+                window.location.href="/admin/deleteProductProcess/"+$("#productId").val();
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 swalWithBootstrapButtons.fire({
                     title: "Cancelled",
@@ -89,11 +92,72 @@ $(document).ready(function(){
         });
     });
 
-    $("#updateBtn").click(function (){
-        window.location.href="/admin/updateProduct/"+$(this).val();
-    });
-
     $("#cancelBtn").click(function(){
         window.location.href="/admin/dashboard";
     });
+
+    if(parseInt($("#quantity").val()) <= 1){
+        $("#decrease-quantity-btn").attr('disabled', true);
+    }
+
+    $("#totalPrice").text(parseInt($("#finalPrice").text()) + parseInt($("#shipping").text()));
+
+    $("#increase-quantity-btn").click(function(){
+        let price = parseInt($("#summaryPrice").text());
+        let quantity = parseInt($("#quantity").val())+1;
+        if(quantity > 9){
+            $(this).attr('disabled', true);
+        }
+        $("#quantity").val(quantity);
+        $("#decrease-quantity-btn").attr('disabled', false);
+        $("#summaryPrice").text(price*quantity);
+        $("#finalPrice").text(price*quantity);
+        $("#totalPrice").text(parseInt($("#finalPrice").text()) + parseInt($("#shipping").text()));
+    });
+
+    $("#decrease-quantity-btn").click(function(){
+        let price = parseInt($("#summaryPrice").text());
+        let quantity = parseInt($("#quantity").val())-1;
+        if(quantity < 2 ){
+            $(this).attr('disabled', true);
+        }
+        $("#quantity").val(quantity);
+        $("#increase-quantity-btn").attr('disabled', false);
+        $("#summaryPrice").text(price/(quantity+1));
+        $("#finalPrice").text(price/(quantity+1));
+        $("#totalPrice").text(parseInt($("#finalPrice").text()) + parseInt($("#shipping").text()));
+    });
+
+
+    $("#addToCartBtn").click(function (){
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Item added to cart successfully!!!",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        window.location.href="/user/addToCart/"+$("#productId").val();
+    });
+
+    $("#addToWishlistBtn").click(function (){
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Item added to wishlist successfully!!!",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    });
+
+    $("#addAddress").click(function (){
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Address added successfully!!!",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    });
+
 });
