@@ -12,6 +12,10 @@
     width: 100px;
 }
 
+.red-heart{
+    color: red!important;
+}
+
 .btn-pill-large{
     border-radius: 100px;
     width: auto;
@@ -22,7 +26,15 @@
 }
 
 .bg-dark-theme{
-    background-color: #202325;
+    background-color: #202325!important;
+}
+
+.bg-lightDark-theme{
+    background-color: #2e3234!important;
+}
+
+.text-whiteSmoke{
+    color: whitesmoke;
 }
 
 .banner-home{
@@ -132,8 +144,29 @@ input[type=number] {
     }
 }
 
+@media (min-width: 1025px) {
+    .h-custom {
+        height: 100vh !important;
+    }
+}
+
 .admin-text-style{
     font-family: Algerian, cursive;
     font-size: 8vh;
     color: whitesmoke;
+}
+
+.product-image{
+    width: auto;
+    height: 75vh;
+    object-fit: cover;
+    border-radius: 1rem 1rem 1rem 1rem;
+    color: whitesmoke;
+}
+
+.profileImg{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
 }

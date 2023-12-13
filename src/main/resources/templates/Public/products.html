@@ -14,12 +14,12 @@
                 <div th:each="p: ${products}" class="col">
                     <div class="card collection-card bg-secondary animate__animated animate__fadeIn">
                         <div>
-                            <a href="#">
+                            <a th:href="@{'/productInfo/'+${p.id}}">
                                 <img th:src="@{'/image/'+${p.image}}" th:alt="${p.getCategory()} +' img'" class="card-img-top collection-image">
                             </a>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="nav-link fs-2 fw-bold" th:text="${p.getName()}"></a>
+                            <a th:href="@{'/productInfo/'+${p.id}}" class="nav-link fs-3 fw-bold" th:text="${p.getName()}"></a>
                             <span class="fw-bold">
                                 <span th:text="'₹ '+${p.getPrice()}"></span>
                             </span>

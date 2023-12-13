@@ -57,8 +57,18 @@ public class HomeController {
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        model.addAttribute("title", "Collections-Mens");
+        model.addAttribute("title", "Collections-"+category);
+        model.addAttribute("pg","collection");
         return "Public/products";
+    }
+
+    @GetMapping("/productInfo/{productId}")
+    public String productDetail(@PathVariable("productId")int productId, Model model){
+        Product product = this.productService.getProductById(productId);
+        model.addAttribute("product", product);
+        model.addAttribute("pg", "collection");
+        model.addAttribute("title", "Collection - "+product.getName());
+        return "Public/productDetail";
     }
 
 }

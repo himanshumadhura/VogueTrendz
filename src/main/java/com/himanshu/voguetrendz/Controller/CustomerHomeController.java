@@ -1,18 +1,25 @@
 package com.himanshu.voguetrendz.Controller;
 
+import com.himanshu.voguetrendz.Entities.Address;
 import com.himanshu.voguetrendz.Entities.Product;
 import com.himanshu.voguetrendz.Entities.User;
+import com.himanshu.voguetrendz.Repository.AddressRepository;
 import com.himanshu.voguetrendz.Repository.UserRepository;
 import com.himanshu.voguetrendz.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,12 +30,16 @@ public class CustomerHomeController {
     private UserRepository userRepository;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private AddressRepository addressRepository;
 
     @ModelAttribute
     public void commonData(Model model, Principal principal){
         User user = userRepository.getUserByUsername(principal.getName());
 
         model.addAttribute("user", user);
+        model.addAttribute("address", user.getAddress());
+
     }
 
     @GetMapping("/dashboard")
@@ -70,8 +81,111 @@ public class CustomerHomeController {
             ex.printStackTrace();
         }
 
+        model.addAttribute("pg", "collection");
         model.addAttribute("title", "Collections-Mens");
         return "Customer/customer_products";
     }
 
+    @GetMapping("/productInfo/{productId}")
+    public String productDetail(@PathVariable("productId")int productId, Model model){
+        model.addAttribute("product", this.productService.getProductById(productId));
+        model.addAttribute("pg", "collection");
+        model.addAttribute("title", "Collection - "+this.productService.getProductById(productId).getName());
+        return "Customer/customer_productDetail";
+    }
+
+    @GetMapping("/addToCart/{productId}")
+    public String addToCart(@PathVariable("productId")int productId, Model model, Principal principal){
+        try{
+            Thread.sleep(1550);
+            System.out.println("Added to cart");
+            User user = this.userRepository.getUserByUsername(principal.getName());
+            Product product = this.productService.getProductById(productId);
+            List<Product> productList = new ArrayList<Product>();
+            productList.add(product);
+            user.setProducts(productList);
+            this.userRepository.save(user);
+            model.addAttribute("product", this.productService.getProductById(productId));
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return "redirect:/user/productInfo/"+productId;
+    }
+
+    @GetMapping("/cart")
+    public String cart(Model model){
+        model.addAttribute("title", "Cart");
+        model.addAttribute("pg", "cart");
+        model.addAttribute("message", "No Product Found");
+        return "Customer/customer_cart";
+    }
+
+    @GetMapping("/addAddress")
+    public String addAddress(Model model){
+        model.addAttribute("title", "Add Address");
+        model.addAttribute("pg", "login");
+        return "Customer/customer_addAddress";
+    }
+
+    @PostMapping("/addAddressProcess")
+    public String addAddressProcess(@RequestParam("houseNo")String houseNo, @RequestParam("area")String area, @RequestParam("city")String city, @RequestParam("pinCode")int pinCode, @RequestParam("state")String state, Principal principal){
+        try{
+            Thread.sleep(1550);
+            Address address = new Address();
+            address.setHouseNo(houseNo);
+            address.setArea(area);
+            address.setCity(city);
+            address.setPinCode(pinCode);
+            address.setState(state);
+            address.setUser(this.userRepository.getUserByUsername(principal.getName()));
+            this.addressRepository.save(address);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return "redirect:/user/profile";
+    }
+
+    @GetMapping("/profile")
+    public String userProfile(Model model){
+        model.addAttribute("title", "Profile");
+        model.addAttribute("pg", "login");
+        return "Customer/customer_profile";
+    }
+
+    @PostMapping("/userProfileUpdate")
+    public String userProfileUpdate(Model model){
+        model.addAttribute("title", "Profile");
+        model.addAttribute("pg", "login");
+        return "Customer/customer_profileUpdate";
+    }
+
+    @PostMapping("/profileUpdateProcess")
+    public String profileUpdateProcess(@RequestParam("profilePic") MultipartFile profilePic, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("houseNo")String houseNo, @RequestParam("area")String area, @RequestParam("city")String city, @RequestParam("pinCode")int pinCode, @RequestParam("state")String state, User user, Principal principal){
+        try{
+            user.setId(user.getId());
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setEmail(email);
+            user.setPhoneNumber(phoneNumber);
+            user.getAddress().setHouseNo(houseNo);
+            user.getAddress().setArea(area);
+            user.getAddress().setCity(city);
+            user.getAddress().setPinCode(pinCode);
+            user.getAddress().setState(state);
+            user.getAddress().setUser(this.userRepository.getUserByUsername(principal.getName()));
+
+            if(profilePic.isEmpty()){
+                System.out.println("File is empty");
+            }else {
+                File file1 = new ClassPathResource("static/image").getFile();
+                Path path = Paths.get(file1.getAbsolutePath() + File.separator + profilePic.getOriginalFilename());
+                Files.copy(profilePic.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+                user.setProfileImg(profilePic.getOriginalFilename());
+            }
+            this.userRepository.save(user);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return "Customer/customer_profile";
+    }
 }

@@ -27,6 +27,7 @@ public class RegisterController {
     @GetMapping("/register")
     public String register(Model model){
         model.addAttribute("title", "Register");
+        model.addAttribute("pg", "login");
         model.addAttribute("loginData", new LoginData());
         model.addAttribute("user", new User());
         return "Authentication/signup";
@@ -48,6 +49,7 @@ public class RegisterController {
                 model.addAttribute("loginData", new LoginData());
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 user.setRole("ROLE_CUSTOMER");
+                user.setProfileImg("profileImg.png");
                 this.userRepository.save(user);
                 System.out.println("USER SAVED");
                 Thread.sleep(1600);

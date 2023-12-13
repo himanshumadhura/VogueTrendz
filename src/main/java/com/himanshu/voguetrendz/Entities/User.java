@@ -1,7 +1,10 @@
 package com.himanshu.voguetrendz.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+
+import java.util.List;
 
 @Entity
 public class User {
@@ -10,31 +13,44 @@ public class User {
     private int id;
 
     @NotBlank(message = "required")
+    @NotNull
     private String firstName;
 
     private String lastName;
 
     @Column(unique = true)
-//    @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}", message = "Invalid Email")
     @NotBlank(message = "required")
+    @NotNull
     private String email;
 
     @Column(unique = true)
     @Size(min = 10, max = 10, message = "Invalid Number")
     @NotBlank(message = "required")
+    @NotNull
     private String phoneNumber;
 
-//    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.@$!%*?&])[A-Za-z0-9.@$!%*?&]{5,10}$", message = "Password must contain one uppercase, one lowercase, one number, one special character and between 5-10 characters !!!")
     @NotBlank(message = "required")
+    @NotNull
     private String password;
 
     private String role;
+
+    private String profileImg;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="cart")
+    @JsonManagedReference
+    @NotNull
+    private List<Product> products;
+
+    @OneToOne(mappedBy = "user")
+    private Address address;
 
     public User() {
         super();
     }
 
-    public User(int id, String firstName, String lastName, String email, String phoneNumber, String password, String role) {
+    public User(int id, String firstName, String lastName, String email, String phoneNumber, String password, String role, String profileImg, List<Product> products, Address address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,6 +58,9 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.role = role;
+        this.profileImg = profileImg;
+        this.products = products;
+        this.address = address;
     }
 
     public int getId() {
@@ -100,6 +119,30 @@ public class User {
         this.role = role;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -110,6 +153,9 @@ public class User {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
+                ", profileImg='" + profileImg + '\'' +
+                ", products=" + products +
+                ", address=" + address +
                 '}';
     }
 }

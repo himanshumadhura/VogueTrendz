@@ -98,7 +98,7 @@ public class AdminController {
         return "Admin/admin_detailProduct";
     }
 
-    @GetMapping("/updateProduct/{productId}")
+    @PostMapping("/updateProduct/{productId}")
     public String updateProduct(@PathVariable("productId")int productId,Model model){
         Product product = this.productService.getProductById(productId);
         model.addAttribute("result", product);
@@ -114,6 +114,10 @@ public class AdminController {
         product1.setName(productName);
         product1.setPrice(product.getPrice());
         product1.setCategory(product.getCategory());
+        product1.setBrand(product.getBrand());
+        product1.setColor(product.getColor());
+        product1.setMaterial(product.getMaterial());
+        product1.setType(product.getType());
 
         if(product1.getDescription()==null){
             product1.setDescription("Fashion Description");
@@ -148,6 +152,13 @@ public class AdminController {
             ex.printStackTrace();
         }
         return "redirect:/admin/searchProduct";
+    }
+
+    @GetMapping("/profile")
+    public String adminProfile(Model model){
+        model.addAttribute("title", "Profile");
+        model.addAttribute("pg", "login");
+        return "Admin/admin_profile";
     }
 
 }

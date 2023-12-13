@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Customer/customer_base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <section class="h-custom">
+        <div class="container my-5 py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-8">
+                    <div class="card bg-lightDark-theme text-whiteSmoke">
+                        <div class="card-body p-4">
+                            <form th:action="@{/user/userProfileUpdate}" method="post">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10 text-whiteSmoke">
+                                        <h2 class="text-center mb-2">User Profile</h2>
+                                        <div class="container text-center">
+                                            <img th:src="@{'/image/'+${user.profileImg}}" alt="profileImg" class="profileImg">
+                                        </div>
+                                        <h4 class="mb-4 text-whiteSmoke">Personal Information</h4>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="input-group d-flex">
+                                                    <span class="input-group-text">First Name</span>
+                                                    <input
+                                                            type="text"
+                                                            id="firstName"
+                                                            name="firstName"
+                                                            class="form-control"
+                                                            placeholder="First Name"
+                                                            th:value="${user.firstName}"
+                                                            readonly
+                                                    >
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="input-group d-flex">
+                                                    <span class="input-group-text">Last Name</span>
+                                                    <input
+                                                            type="text"
+                                                            id="lastName"
+                                                            name="lastName"
+                                                            class="form-control"
+                                                            placeholder="Last Name"
+                                                            th:value="${user.lastName}"
+                                                            readonly
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <div class="input-group d-flex">
+                                                    <span class="input-group-text">Email Id</span>
+                                                    <input
+                                                            type="email"
+                                                            id="email"
+                                                            name="email"
+                                                            class="form-control"
+                                                            placeholder="Email"
+                                                            th:value="${user.email}"
+                                                            readonly
+                                                    >
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="input-group d-flex">
+                                                    <span class="input-group-text">Mobile Number</span>
+                                                    <input
+                                                            type="number"
+                                                            id="phoneNumber"
+                                                            name="phoneNumber"
+                                                            class="form-control"
+                                                            placeholder="Mobile Number"
+                                                            th:value="${user.phoneNumber}"
+                                                            readonly
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-11">
+                                        <hr class="text-white border-2">
+                                    </div>
+                                    <div class="col-lg-10 text-whiteSmoke">
+                                        <h4 class="mb-3 text-whiteSmoke">Your Address</h4>
+                                        <div th:if="${user.getAddress()}!= null">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="input-group d-flex">
+                                                        <span class="input-group-text">House/Flat No.</span>
+                                                        <input
+                                                                type="text"
+                                                                id="houseNo"
+                                                                name="houseNo"
+                                                                class="form-control"
+                                                                placeholder="House/Flat No."
+                                                                th:value="${user.address.houseNo}"
+                                                                readonly
+                                                        >
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group d-flex">
+                                                        <span class="input-group-text">Area/Street/Sector</span>
+                                                        <input
+                                                                type="text"
+                                                                id="area"
+                                                                name="area"
+                                                                class="form-control"
+                                                                placeholder="Area/Street/Sector"
+                                                                th:value="${user.address.area}"
+                                                                readonly
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="input-group d-flex">
+                                                        <span class="input-group-text">Town/City</span>
+                                                        <input
+                                                                type="text"
+                                                                id="city"
+                                                                name="city"
+                                                                class="form-control"
+                                                                placeholder="Town/City"
+                                                                th:value="${user.address.city}"
+                                                                readonly
+                                                        >
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group d-flex">
+                                                        <span class="input-group-text">Pin Code</span>
+                                                        <input
+                                                                type="number"
+                                                                id="pinCode"
+                                                                name="pinCode"
+                                                                class="form-control"
+                                                                placeholder="Pin Code"
+                                                                th:value="${user.address.pinCode}"
+                                                                readonly
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <div class="col-md-6">
+                                                    <div class="input-group d-flex">
+                                                        <span class="input-group-text">State</span>
+                                                        <input
+                                                                type="text"
+                                                                id="state"
+                                                                name="state"
+                                                                class="form-control"
+                                                                placeholder="State"
+                                                                th:value="${user.address.state}"
+                                                                readonly
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div th:unless="${user.getAddress()}!=null">
+                                            <button type="button" onclick="window.location.href='/user/addAddress'" class="btn btn-primary btn-pill-large mb-4"><i class="bi bi-plus"></i>Add Address</button>
+                                        </div>
+                                    </div>
+                                    <div class="container text-center">
+                                        <button type="submit" class="btn btn-success me-2 btn-pill">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

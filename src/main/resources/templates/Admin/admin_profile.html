@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Admin/admin_base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<section class="h-custom">
+    <div class="container my-5 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8">
+                <div class="card bg-lightDark-theme text-whiteSmoke">
+                    <div class="card-body p-4">
+                        <form>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 text-whiteSmoke mb-4">
+                                    <h2 class="text-center mb-2">Admin Profile</h2>
+                                    <div class="container text-center">
+                                        <img th:src="@{'/image/'+${user.profileImg}}" alt="profileImg" class="profileImg">
+                                    </div>
+                                    <h4 class="mb-4 text-whiteSmoke">Personal Information</h4>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="input-group d-flex">
+                                                <span class="input-group-text">First Name</span>
+                                                <input
+                                                        type="text"
+                                                        id="firstName"
+                                                        name="firstName"
+                                                        class="form-control"
+                                                        placeholder="First Name"
+                                                        th:value="${user.firstName}"
+                                                        readonly
+                                                >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="input-group d-flex">
+                                                <span class="input-group-text">Last Name</span>
+                                                <input
+                                                        type="text"
+                                                        id="lastName"
+                                                        name="lastName"
+                                                        class="form-control"
+                                                        placeholder="Last Name"
+                                                        th:value="${user.lastName}"
+                                                        readonly
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <div class="input-group d-flex">
+                                                <span class="input-group-text">Email Id</span>
+                                                <input
+                                                        type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        class="form-control"
+                                                        placeholder="Email"
+                                                        th:value="${user.email}"
+                                                        readonly
+                                                >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="input-group d-flex">
+                                                <span class="input-group-text">Mobile Number</span>
+                                                <input
+                                                        type="number"
+                                                        id="phoneNumber"
+                                                        name="phoneNumber"
+                                                        class="form-control"
+                                                        placeholder="Mobile Number"
+                                                        th:value="${user.phoneNumber}"
+                                                        readonly
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container text-center">
+                                    <button type="button" id="" class="btn btn-success me-2 btn-pill">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

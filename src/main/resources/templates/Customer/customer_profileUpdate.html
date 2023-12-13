@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Customer/customer_base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<section class="h-custom">
+    <div class="container my-5 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8">
+                <div class="card bg-lightDark-theme text-whiteSmoke">
+                    <div class="card-body p-4">
+                        <form th:action="@{/user/profileUpdateProcess}" method="post" enctype="multipart/form-data">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 text-whiteSmoke">
+                                    <h2 class="text-center mb-2">Update your Profile</h2>
+                                    <div class="container text-center mb-4 col-md-6">
+                                        <img th:src="@{'/image/'+${user.profileImg}}" alt="profileImg" class="profileImg">
+                                        <input
+                                                type="file"
+                                                id="profilePic"
+                                                    name="profilePic"
+                                                class="form-control"
+                                                accept=".png, .jpg, .jpeg"
+                                                required
+                                        >
+                                    </div>
+                                    <h4 class="mb-4 text-whiteSmoke">Personal Information</h4>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="input-group d-flex">
+                                                <span class="input-group-text">First Name</span>
+                                                <input
+                                                        type="text"
+                                                        id="firstName"
+                                                        name="firstName"
+                                                        class="form-control"
+                                                        placeholder="First Name"
+                                                        th:value="${user.firstName}"
+                                                        required
+                                                >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="input-group d-flex">
+                                                <span class="input-group-text">Last Name</span>
+                                                <input
+                                                        type="text"
+                                                        id="lastName"
+                                                        name="lastName"
+                                                        class="form-control"
+                                                        placeholder="Last Name"
+                                                        th:value="${user.lastName}"
+                                                        required
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <div class="input-group d-flex">
+                                                <span class="input-group-text">Email Id</span>
+                                                <input
+                                                        type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        class="form-control"
+                                                        placeholder="Email"
+                                                        th:value="${user.email}"
+                                                        required
+                                                >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="input-group d-flex">
+                                                <span class="input-group-text">Mobile Number</span>
+                                                <input
+                                                        type="number"
+                                                        id="phoneNumber"
+                                                        name="phoneNumber"
+                                                        class="form-control"
+                                                        placeholder="Mobile Number"
+                                                        th:value="${user.phoneNumber}"
+                                                        required
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-11">
+                                    <hr class="text-white border-2">
+                                </div>
+                                <div class="col-lg-10 text-whiteSmoke">
+                                    <div th:if="${user.getAddress()}!= null">
+                                        <h4 class="mb-4 text-whiteSmoke">Your Address</h4>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="input-group d-flex">
+                                                    <span class="input-group-text">House/Flat No.</span>
+                                                    <input
+                                                            type="text"
+                                                            id="houseNo"
+                                                            name="houseNo"
+                                                            class="form-control"
+                                                            placeholder="House/Flat No."
+                                                            th:value="${user.address.houseNo}"
+                                                            required
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group d-flex">
+                                                    <span class="input-group-text">Area/Street/Sector</span>
+                                                    <input
+                                                            type="text"
+                                                            id="area"
+                                                            name="area"
+                                                            class="form-control"
+                                                            placeholder="Area/Street/Sector"
+                                                            th:value="${user.address.area}"
+                                                            required
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="input-group d-flex">
+                                                    <span class="input-group-text">Town/City</span>
+                                                    <input
+                                                            type="text"
+                                                            id="city"
+                                                            name="city"
+                                                            class="form-control"
+                                                            placeholder="Town/City"
+                                                            th:value="${user.address.city}"
+                                                            required
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group d-flex">
+                                                    <span class="input-group-text">Pin Code</span>
+                                                    <input
+                                                            type="number"
+                                                            id="pinCode"
+                                                            name="pinCode"
+                                                            class="form-control"
+                                                            placeholder="Pin Code"
+                                                            th:value="${user.address.pinCode}"
+                                                            required
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <div class="input-group d-flex">
+                                                    <span class="input-group-text">State</span>
+                                                    <input
+                                                            type="text"
+                                                            id="state"
+                                                            name="state"
+                                                            class="form-control"
+                                                            placeholder="State"
+                                                            th:value="${user.address.state}"
+                                                            required
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container text-center">
+                                    <button type="submit" class="btn btn-success me-2 btn-pill">Save</button>
+                                    <button type="button" class="btn btn-secondary btn-pill" onclick="window.location.href='/user/profile'">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
