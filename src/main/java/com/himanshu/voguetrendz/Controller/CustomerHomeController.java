@@ -6,6 +6,10 @@ import com.himanshu.voguetrendz.Entities.User;
 import com.himanshu.voguetrendz.Repository.AddressRepository;
 import com.himanshu.voguetrendz.Repository.UserRepository;
 import com.himanshu.voguetrendz.Service.ProductService;
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
+import com.razorpay.RazorpayException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -21,6 +25,7 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -204,5 +209,21 @@ public class CustomerHomeController {
             ex.printStackTrace();
         }
         return "Customer/customer_profile";
+    }
+
+    @PostMapping("/create_order")
+    @ResponseBody
+    public String createOrder(@RequestBody Map<String, Object> data)throws RazorpayException {
+//        System.out.println(data);
+        int amount = Integer.parseInt(data.get("amount").toString());
+        RazorpayClient client = new RazorpayClient("rzp_test_EfSo5IaAFzDMqi", "iLESWdk9TdEZtnk8n4qJpKy9");
+        JSONObject ob = new JSONObject();
+        ob.put("amount", amount*100);
+        ob.put("currency", "INR");
+        ob.put("receipt", "txn_180205");
+
+        Order order = client.orders.create(ob);
+        System.out.println(order);
+        return order.toString();
     }
 }
