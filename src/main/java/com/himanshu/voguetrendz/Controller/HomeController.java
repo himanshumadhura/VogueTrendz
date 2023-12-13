@@ -32,6 +32,22 @@ public class HomeController {
         return "Public/home";
     }
 
+    @GetMapping("/collection")
+    public String collection(Model model){
+        try{
+            List<Product> products =  this.productService.getAllProducts();
+            if(products.size()<=0){
+                model.addAttribute("message", "No Product Found");
+            }
+            model.addAttribute("products", products);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        model.addAttribute("title", "Collections");
+        model.addAttribute("pg","collection");
+        return "Public/allProducts";
+    }
+
     @GetMapping("/about")
     public String about(Model model){
         model.addAttribute("title","About - VogueTrendz");

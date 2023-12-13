@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Public/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+    <section class="bg-dark-theme">
+        <div class="container p-5">
+            <div class="row mt-4 pt-5 g-4" th:if="${!products.isEmpty()}">
+                <div th:each="p: ${products}" class="col">
+                    <div class="card collection-card bg-secondary animate__animated animate__fadeIn">
+                        <div>
+                            <a th:href="@{'/productInfo/'+${p.id}}">
+                                <img th:src="@{'/image/'+${p.image}}" th:alt="${p.getCategory()} +' img'" class="card-img-top collection-image">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <a th:href="@{'/productInfo/'+${p.id}}" class="nav-link fs-3 fw-bold" th:text="${p.getName()}"></a>
+                            <span class="fw-bold">
+                                <span th:text="'₹ '+${p.getPrice()}"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4 pt-5" th:unless="${!products.isEmpty()}">
+                <div class="container text-center fs-3 text-white" th:text="${message}"></div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
