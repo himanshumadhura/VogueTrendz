@@ -1,6 +1,5 @@
 package com.himanshu.voguetrendz.Entities;
 
-import com.himanshu.voguetrendz.Entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
