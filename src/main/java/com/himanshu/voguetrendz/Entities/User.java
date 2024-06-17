@@ -40,7 +40,6 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="cart")
     @JsonManagedReference
-    @NotNull
     private List<Product> products;
 
     @OneToOne(mappedBy = "user")

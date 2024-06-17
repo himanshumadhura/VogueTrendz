@@ -54,7 +54,7 @@ public class CustomerHomeController {
         return "Customer/dashboard";
     }
 
-    @GetMapping("/collection")
+    @GetMapping("/collections")
     public String collection(Model model){
         try{
             List<Product> products =  this.productService.getAllProducts();
@@ -88,6 +88,7 @@ public class CustomerHomeController {
     public String wishlist(Model model){
         model.addAttribute("pg", "wishlist");
         model.addAttribute("title","Wishlist");
+        model.addAttribute("message", "No Product Found");
         return "Customer/wishlist";
     }
 
@@ -225,5 +226,11 @@ public class CustomerHomeController {
         Order order = client.orders.create(ob);
         System.out.println(order);
         return order.toString();
+    }
+
+    @DeleteMapping("/remove_item/{productId}")
+    public String removeItem(@PathVariable("productId") int productId){
+        this.productService.deleteProduct(productId);
+        return "Customer/wishlist";
     }
 }
