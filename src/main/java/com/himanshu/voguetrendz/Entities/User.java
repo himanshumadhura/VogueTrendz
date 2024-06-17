@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,10 +38,23 @@ public class User {
 
     private String profileImg;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="cart")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "cart",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     @JsonManagedReference
-    private List<Product> products;
+    private List<Product> products = new ArrayList<Product>();
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "wishlist",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    @JsonManagedReference
+    private List<Product> wishlist = new ArrayList<>();
 
     @OneToOne(mappedBy = "user")
     private Address address;
@@ -49,7 +63,7 @@ public class User {
         super();
     }
 
-    public User(int id, String firstName, String lastName, String email, String phoneNumber, String password, String role, String profileImg, List<Product> products, Address address) {
+    public User(int id, String firstName, String lastName, String email, String phoneNumber, String password, String role, String profileImg, List<Product> products, Address address, List<Product> wishlist) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,6 +73,7 @@ public class User {
         this.role = role;
         this.profileImg = profileImg;
         this.products = products;
+        this.wishlist = wishlist;
         this.address = address;
     }
 
@@ -126,6 +141,14 @@ public class User {
         this.products = products;
     }
 
+    public List<Product> getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(List<Product> wishlist) {
+        this.wishlist = wishlist;
+    }
+
     public String getProfileImg() {
         return profileImg;
     }
@@ -154,6 +177,7 @@ public class User {
                 ", role='" + role + '\'' +
                 ", profileImg='" + profileImg + '\'' +
                 ", products=" + products +
+                ", wishlist=" + wishlist +
                 ", address=" + address +
                 '}';
     }

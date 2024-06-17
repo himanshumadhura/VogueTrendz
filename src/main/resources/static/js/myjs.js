@@ -148,6 +148,7 @@ $(document).ready(function(){
             showConfirmButton: false,
             timer: 1500
         });
+        window.location.href="/user/addToWishlist/"+$("#productId").val();
     });
 
     $("#addAddress").click(function (){

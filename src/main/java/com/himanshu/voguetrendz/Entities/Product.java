@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -42,12 +43,17 @@ public class Product {
 
     @ManyToMany(mappedBy = "products")
     @JsonBackReference
-    private List<User> users;
+    private List<User> users = new ArrayList<User>();
+
+    @ManyToMany(mappedBy = "wishlist")
+    @JsonBackReference
+    private List<User> wishlistUsers = new ArrayList<User>();
+
 
     public Product() {
     }
 
-    public Product(int id, String category, String name, String description, String price, String image, String type, String color, String material, String brand, List<User> users) {
+    public Product(int id, String category, String name, String description, String price, String image, String type, String color, String material, String brand, List<User> users, List<User> wishlistUsers) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -59,6 +65,7 @@ public class Product {
         this.material = material;
         this.brand = brand;
         this.users = users;
+        this.wishlistUsers = wishlistUsers;
     }
 
     public int getId() {
@@ -149,6 +156,14 @@ public class Product {
         this.users = users;
     }
 
+    public List<User> getWishlistUsers() {
+        return wishlistUsers;
+    }
+
+    public void setWishlistUsers(List<User> wishlistUsers) {
+        this.wishlistUsers = wishlistUsers;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -163,6 +178,7 @@ public class Product {
                 ", material='" + material + '\'' +
                 ", brand='" + brand + '\'' +
                 ", users=" + users +
+                ". wishlistUsers=" + wishlistUsers +
                 '}';
     }
 }

@@ -5,7 +5,9 @@ import com.himanshu.voguetrendz.Entities.Product;
 import com.himanshu.voguetrendz.Entities.User;
 import com.himanshu.voguetrendz.Repository.AddressRepository;
 import com.himanshu.voguetrendz.Repository.UserRepository;
+import com.himanshu.voguetrendz.Service.CartService;
 import com.himanshu.voguetrendz.Service.ProductService;
+import com.himanshu.voguetrendz.Service.WishlistService;
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
@@ -37,6 +39,10 @@ public class CustomerHomeController {
     private ProductService productService;
     @Autowired
     private AddressRepository addressRepository;
+    @Autowired
+    private CartService cartService;
+    @Autowired
+    private WishlistService wishlistService;
 
     @ModelAttribute
     public void commonData(Model model, Principal principal){
@@ -121,13 +127,33 @@ public class CustomerHomeController {
     public String addToCart(@PathVariable("productId")int productId, Model model, Principal principal){
         try{
             Thread.sleep(1550);
-            System.out.println("Added to cart");
-            User user = this.userRepository.getUserByUsername(principal.getName());
-            Product product = this.productService.getProductById(productId);
-            List<Product> productList = new ArrayList<Product>();
-            productList.add(product);
-            user.setProducts(productList);
-            this.userRepository.save(user);
+            User user = userRepository.getUserByUsername(principal.getName());
+            Product product = productService.getProductById(productId);
+            if (user.getProducts().contains(product)){
+                System.out.println("Already Added");
+            }else {
+                cartService.addToCart(user, product);
+                System.out.println("Added to cart");
+            }
+            model.addAttribute("product", this.productService.getProductById(productId));
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return "redirect:/user/productInfo/"+productId;
+    }
+
+    @GetMapping("/addToWishlist/{productId}")
+    public String addToWishlist(@PathVariable("productId")int productId, Model model, Principal principal){
+        try{
+            Thread.sleep(1550);
+            User user = userRepository.getUserByUsername(principal.getName());
+            Product product = productService.getProductById(productId);
+            if (user.getWishlist().contains(product)){
+                System.out.println("Already Added");
+            }else {
+                wishlistService.addToWishlist(user, product);
+                System.out.println("Added to Wishlist");
+            }
             model.addAttribute("product", this.productService.getProductById(productId));
         }catch (Exception ex){
             ex.printStackTrace();
