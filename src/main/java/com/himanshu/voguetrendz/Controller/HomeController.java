@@ -32,7 +32,7 @@ public class HomeController {
         return "Public/home";
     }
 
-    @GetMapping("/collection")
+    @GetMapping("/collections")
     public String collection(Model model){
         try{
             List<Product> products =  this.productService.getAllProducts();
